@@ -3,10 +3,13 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-2">Filter by:</div>
-      <div class="col-md-4"><input type="text" /></div>
+      <div class="col-md-4"><input type="text" [(ngModel)]="listFilter" /></div>
+      <!--in order to use (ngModel), we must import FormsModule and have it widely available-->
     </div>
     <div class="row">
-      <div class="col-md-6"><h4>Filtered by:</h4></div>
+      <div class="col-md-6">
+        <h4>Filtered by: {{ listFilter }}</h4>
+      </div>
     </div>
   </div>
   <div class="table-responsive">
@@ -14,7 +17,9 @@
       <thead>
         <tr>
           <th>
-            <button class="btn btn-primary">Show Image</button>
+            <button class="btn btn-primary" (click)="showImage_Event()">
+              {{ showImage ? "hide" : "show" }}
+            </button>
           </th>
           <th>Product</th>
           <th>Code</th>
@@ -23,11 +28,21 @@
           <th>5 Star Rating</th>
         </tr>
         <tr *ngFor="let maProduct of products">
-          <td>{{ maProduct.productId }}</td>
+          <td>
+            <img
+              *ngIf="showImage"
+              [src]="maProduct.imageUrl"
+              [alt]="maProduct.productName"
+              [title]="maProduct.productName"
+              [width]="imageWidth"
+              [style.width.px]="imageWidth"
+              [style.marging.px]="imageMargin"
+            />
+          </td>
           <td>{{ maProduct.productName }}</td>
-          <td>{{ maProduct.productCode }}</td>
+          <td>{{ maProduct.productCode | lowercase}}</td>
           <td>{{ maProduct.releaseDate }}</td>
-          <td>{{ maProduct.price }}</td>
+          <td>{{ maProduct.price | currency: "USD":"symbol":"1.2-2" }}</td>
           <td>{{ maProduct.starRating }}</td>
         </tr>
       </thead>

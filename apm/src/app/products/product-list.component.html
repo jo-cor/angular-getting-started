@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">{{ this.pageTitle }}</div>
+  <div class="card-header">{{ this.pageTitle }} {{this.selectedRating}}</div>
   <div class="card-body">
     <div class="row">
       <div class="col-md-2">Filter by:</div>
@@ -44,7 +44,8 @@
         <td>{{ maProduct.productCode | lowercase | convertToSpaces: "-" }}</td>
         <td>{{ maProduct.releaseDate }}</td>
         <td>{{ maProduct.price | currency: "USD":"symbol":"1.2-2" }}</td>
-        <td>{{ maProduct.starRating }}</td>
+        <!--this property binding is possible because starRating is denoted as @Input-->
+        <td><pm-start [rating]="maProduct.starRating" (maBigMadafakaNotification)="onNotify($event)"></pm-start></td>
       </tr>
       <tbody></tbody>
     </table>

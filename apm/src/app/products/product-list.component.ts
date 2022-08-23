@@ -9,6 +9,7 @@ import { IProduct } from './product';
 export class ProductListComponent implements OnInit {
   pageTitle: string = `Product
     List`;
+  selectedRating: string = ``;
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
@@ -76,5 +77,14 @@ export class ProductListComponent implements OnInit {
         r.productName.toLocaleLowerCase().includes(value.toLocaleLowerCase())
       );
     });
+  }
+
+  // interesting... at the console, you'll get this LOG first
+  // then, you'll get the LOG for the emitter... so basically:
+  // > notification received! [clickeado!!!]
+  // > clickeado!!!
+  onNotify(myReceivedEvent: string): void {
+    this.selectedRating = myReceivedEvent;
+    console.log(`notification received! [${myReceivedEvent}]`);
   }
 }

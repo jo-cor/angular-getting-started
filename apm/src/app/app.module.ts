@@ -11,7 +11,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProductDetailGuard } from './shared/services/product-detail-guard.service';
+import { ProductDetailGuard } from './product-detail/product-detail.guard';
 
 // order matters! always more specific to less specific. the first found will be used
 // const routes: Routes = [

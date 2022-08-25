@@ -5,7 +5,7 @@ import { ProductService } from '../shared/services/product.service';
 import { IProduct } from './product';
 
 @Component({
-  selector: 'pm-products',
+  // selector: 'pm-products', selector removed because it won't be embedded but instead handled by routing
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })

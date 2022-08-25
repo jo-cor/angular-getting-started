@@ -41,7 +41,8 @@
           />
         </td>
         <td>
-          <a routerLink="/products/{{ this.maProduct.productId }}">{{
+          <!--routerLink="/products/{{ this.maProduct.productId }}"-->
+          <a [routerLink]="['/products', this.maProduct.productId]">{{
             maProduct.productName
           }}</a>
         </td>

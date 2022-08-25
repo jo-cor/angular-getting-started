@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
 import { IProduct } from './product';
@@ -16,6 +17,7 @@ export class ProductListComponent implements OnInit {
   showImage: boolean = false;
   products: IProduct[] = [];
   filteredProducts: IProduct[] = [];
+  errorMessage: string = '';
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -35,8 +37,14 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.productService.getProducts().subscribe({
+      next: (r) => {
+        this.products = r;
+        this.filteredProducts = this.products;
+      },
+      error: (err) => (this.errorMessage = err),
+    });
+
     console.log('[[[debug]]] @ ngOnInit');
   }
 

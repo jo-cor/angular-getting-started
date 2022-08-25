@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProductService } from '../shared/services/product.service';
 import { IProduct } from './product';
 
@@ -7,7 +9,7 @@ import { IProduct } from './product';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   pageTitle: string = `Product
     List`;
   selectedRating: string = ``;
@@ -16,6 +18,8 @@ export class ProductListComponent implements OnInit {
   showImage: boolean = false;
   products: IProduct[] = [];
   filteredProducts: IProduct[] = [];
+  errorMessage: string = '';
+  sub!: Subscription;
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -35,9 +39,19 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.sub = this.productService.getProducts().subscribe({
+      next: (r) => {
+        this.products = r;
+        this.filteredProducts = this.products;
+      },
+      error: (err) => (this.errorMessage = err),
+    });
+
     console.log('[[[debug]]] @ ngOnInit');
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   shouldDisplayProducts(): boolean {

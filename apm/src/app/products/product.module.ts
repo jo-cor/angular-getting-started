@@ -7,6 +7,7 @@ import { StarComponent } from '../shared/star/star.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductDetailGuard } from '../product-detail/product-detail.guard';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
@@ -24,6 +25,6 @@ const routes: Routes = [
     ConvertToSpacesPipe,
     StarComponent,
   ],
-  imports: [CommonModule, FormsModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, FormsModule, RouterModule.forChild(routes), SharedModule],
 })
 export class ProductModule {}

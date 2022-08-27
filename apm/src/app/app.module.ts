@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductDetailGuard } from './product-detail/product-detail.guard';
+import { ProductModule } from './products/product.module';
 
 // order matters! always more specific to less specific. the first found will be used
 // const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    ProductModule,
   ],
   bootstrap: [AppComponent],
 })

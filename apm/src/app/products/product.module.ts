@@ -5,6 +5,17 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 import { ConvertToSpacesPipe } from '../shared/convert-to-spaces.pipe';
 import { StarComponent } from '../shared/star/star.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductDetailGuard } from '../product-detail/product-detail.guard';
+
+const routes: Routes = [
+  { path: 'products', component: ProductListComponent },
+  {
+    path: 'products/:id',
+    canActivate: [ProductDetailGuard], //assign this guard to this url
+    component: ProductDetailComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -13,6 +24,6 @@ import { FormsModule } from '@angular/forms';
     ConvertToSpacesPipe,
     StarComponent,
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule.forChild(routes)],
 })
 export class ProductModule {}

@@ -38,10 +38,12 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     WelcomeComponent,
-    ProductListComponent,
-    ProductDetailComponent,
-    ConvertToSpacesPipe,
-    StarComponent,
+    //This import contains errors, which may affect components that depend on this NgModule.
+    //these components must be removed because we're importing the new ProductModule which already declares them
+    // ProductListComponent,
+    // ProductDetailComponent,
+    // ConvertToSpacesPipe,
+    // StarComponent,
     PageNotFoundComponent,
   ],
   imports: [
